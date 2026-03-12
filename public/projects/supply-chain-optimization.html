@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Chain Optimization Analysis | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        },
+                        accent: '#f59e0b',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .article-text { font-family: 'Merriweather', serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        /* Custom scrollbar for modal */
+        .modal-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        .modal-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .modal-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .modal-scroll::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 glass-panel border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <i class="ph-fill ph-chart-polar text-brand-600 text-2xl"></i>
+                    <span class="font-bold text-xl tracking-tight text-slate-900">DataAnalyst<span class="text-brand-600">.Portfolio</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="text-slate-600 hover:text-brand-600 font-medium transition">Overview</a>
+                    <a href="#analysis" class="text-slate-600 hover:text-brand-600 font-medium transition">Analysis</a>
+                    <a href="#recommendations" class="text-slate-600 hover:text-brand-600 font-medium transition">Recommendations</a>
+                </div>
+                <button onclick="openReport()" class="px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition text-sm font-medium">Read Full Analysis</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+            <div class="absolute top-32 -left-24 w-72 h-72 bg-accent/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-700 text-xs font-semibold uppercase tracking-wide mb-6">
+                <i class="ph-bold ph-lightning"></i> Supply Chain Analytics Case Study
+            </div>
+            <h1 class="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6">
+                Optimizing Global Retail <br class="hidden md:block" />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400">Supply Chain Operations</span>
+            </h1>
+            <p class="mt-4 text-xl text-slate-600 max-w-2xl mx-auto">
+                Analyzing delivery bottlenecks to reduce late shipments from 57% to 19% through data-driven production and inventory optimization.
+            </p>
+            
+            <div class="mt-10 flex justify-center gap-4">
+                <a href="#analysis" class="px-8 py-3 bg-brand-600 text-white rounded-xl font-semibold shadow-lg shadow-brand-500/30 hover:bg-brand-700 hover:-translate-y-1 transition duration-300">
+                    View Analysis
+                </a>
+                <button onclick="openReport()" class="px-8 py-3 bg-white text-slate-700 border border-slate-200 rounded-xl font-semibold hover:bg-slate-50 transition duration-300 flex items-center gap-2">
+                    <i class="ph-bold ph-read-cv-logo text-brand-600"></i> Read Full Report
+                </button>
+            </div>
+
+            <!-- Key Metrics Grid -->
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 text-left max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="text-slate-500 text-sm font-medium mb-1">Current Late Delivery Rate</div>
+                    <div class="text-4xl font-bold text-red-500">57%</div>
+                    <div class="text-xs text-slate-400 mt-2">Baseline (2015-2017)</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="text-slate-500 text-sm font-medium mb-1">Target Reduction</div>
+                    <div class="text-4xl font-bold text-green-600">19%</div>
+                    <div class="text-xs text-slate-400 mt-2">Goal for FY 2018</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="text-slate-500 text-sm font-medium mb-1">Impact on Sales</div>
+                    <div class="text-4xl font-bold text-slate-800">-15%</div>
+                    <div class="text-xs text-slate-400 mt-2">Transaction decline in 2017</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Overview Section -->
+    <section id="overview" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">Executive Summary</h2>
+                    <p class="text-slate-600 mb-6 leading-relaxed">
+                        Between 2015 and 2017, the organization faced a critical supply chain inefficiency where <strong class="text-slate-900">57% of shipments were delayed</strong>. This operational bottleneck correlated directly with a <strong class="text-slate-900">15% decline in total transactions</strong> in 2017.
+                    </p>
+                    <p class="text-slate-600 mb-8 leading-relaxed">
+                        The objective of this analysis is to identify the root causes of these delays—specifically focusing on the <strong>Production Process Flow</strong>—and provide actionable strategies to reduce late deliveries to a target of 19%.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center text-brand-600 flex-shrink-0">
+                                <i class="ph-bold ph-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-900">Data Source & Tools</h4>
+                                <p class="text-sm text-slate-500">DataCo Smart Supply Chain Dataset | SQL, Python, Tableau</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center text-brand-600 flex-shrink-0">
+                                <i class="ph-bold ph-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-900">Dataset Scale</h4>
+                                <p class="text-sm text-slate-500">18,000+ Order Records (Global Scope)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100">
+                    <h3 class="text-lg font-semibold mb-4 text-slate-800">Order Volume Trend (2015-2017)</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="orderTrendChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-slate-400 mt-4">Significant drop in orders observed in 2017 correlated with delivery issues.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analysis Section -->
+    <section id="analysis" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900">Root Cause Analysis</h2>
+                <p class="mt-4 text-slate-600">Deep diving into Inventory, Processing, and Shipping data.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1: Stock Availability -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-6">
+                        <i class="ph-duotone ph-warning text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Critical Stock Levels</h3>
+                    <p class="text-slate-600 text-sm mb-6">
+                        Only <strong>17%</strong> of products were available in stock for immediate shipping. 83% of orders were placed without stock on hand, contributing to 46% of delays.
+                    </p>
+                    <div class="relative h-48">
+                        <canvas id="stockChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Card 2: Shipping Mode -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-6">
+                        <i class="ph-duotone ph-truck text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Shipping Mode Inefficiency</h3>
+                    <p class="text-slate-600 text-sm mb-6">
+                        <strong>93%</strong> of shipments use "Standard" shipping (2-4 days), while only 7% use "Same Day". This dominance of slower modes extends lead times significantly.
+                    </p>
+                    <div class="relative h-48 flex items-center justify-center">
+                        <canvas id="shippingChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Card 3: Schedule Mismatch -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 mb-6">
+                        <i class="ph-duotone ph-calendar-x text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Planning Errors</h3>
+                    <p class="text-slate-600 text-sm mb-6">
+                        Approximately <strong>11%</strong> of shipments experienced planning errors, where inaccurate scheduling classified potentially on-time deliveries as late.
+                    </p>
+                    <div class="bg-slate-50 rounded-lg p-4 mt-4">
+                        <div class="flex justify-between items-center text-sm mb-2">
+                            <span class="text-slate-600">Planning Accuracy</span>
+                            <span class="font-bold text-slate-900">89%</span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-2">
+                            <div class="bg-purple-500 h-2 rounded-full" style="width: 89%"></div>
+                        </div>
+                        <div class="flex justify-between items-center text-sm mt-4 mb-2">
+                            <span class="text-slate-600">Error Rate</span>
+                            <span class="font-bold text-red-500">11%</span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-2">
+                            <div class="bg-red-400 h-2 rounded-full" style="width: 11%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insight Section -->
+            <div class="mt-12 bg-white rounded-2xl p-8 border border-slate-200 shadow-sm flex flex-col md:flex-row gap-8 items-center">
+                <div class="flex-1">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">Seasonality Insights</h3>
+                    <p class="text-slate-600 mb-4">
+                        Analysis reveals a strong interest in shopping during Q1-Q3, with a noticeable decline in Q4. However, stock availability remains flat across all seasons, failing to adapt to these demand spikes.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-slate-700">
+                            <i class="ph-fill ph-caret-right text-brand-500"></i> High Season: Q1 - Q3 (Stable Volume)
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-700">
+                            <i class="ph-fill ph-caret-right text-brand-500"></i> Low Season: Q4 (Sharp Decline)
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex-1 w-full">
+                     <canvas id="seasonalityChart" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations Section -->
+    <section id="recommendations" class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        <!-- Background accents -->
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-brand-900 opacity-20 transform skew-x-12"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white">Strategic Recommendations</h2>
+                <p class="mt-4 text-slate-400">A roadmap to reduce late deliveries by 30%.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Rec 1 -->
+                <div class="bg-slate-800/50 backdrop-blur border border-slate-700 p-8 rounded-2xl">
+                    <div class="text-brand-400 font-bold text-lg mb-4">01. Inventory Optimization</div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Increase Stock Availability</h3>
+                    <p class="text-slate-400 text-sm mb-6">
+                        Implement a monitoring system to boost stock availability from 17% to <strong>46%</strong>, specifically targeting the top 10 sub-categories.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex gap-2"><i class="ph-bold ph-arrow-right text-brand-500"></i> Use forecast-per-month logic</li>
+                        <li class="flex gap-2"><i class="ph-bold ph-arrow-right text-brand-500"></i> Focus on high-demand seasons</li>
+                    </ul>
+                </div>
+
+                <!-- Rec 2 -->
+                <div class="bg-slate-800/50 backdrop-blur border border-slate-700 p-8 rounded-2xl">
+                    <div class="text-brand-400 font-bold text-lg mb-4">02. Logistics Strategy</div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Optimize Shipping Modes</h3>
+                    <p class="text-slate-400 text-sm mb-6">
+                        Shift urgent orders to "Same Day" shipping when stock is unavailable. Use "Standard" mode strictly for planned restocking.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex gap-2"><i class="ph-bold ph-arrow-right text-brand-500"></i> Coordinate with logistics dept</li>
+                        <li class="flex gap-2"><i class="ph-bold ph-arrow-right text-brand-500"></i> Evaluate cost vs. speed trade-offs</li>
+                    </ul>
+                </div>
+
+                <!-- Rec 3 -->
+                <div class="bg-slate-800/50 backdrop-blur border border-slate-700 p-8 rounded-2xl">
+                    <div class="text-brand-400 font-bold text-lg mb-4">03. Process Improvement</div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Train PPIC Team</h3>
+                    <p class="text-slate-400 text-sm mb-6">
+                        Establish a dedicated team to oversee production planning and eliminate scheduling errors. Ensure customers are informed of realistic timelines.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex gap-2"><i class="ph-bold ph-arrow-right text-brand-500"></i> Align schedules with 3-day lead time</li>
+                        <li class="flex gap-2"><i class="ph-bold ph-arrow-right text-brand-500"></i> Reduce schedule variance</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <div class="inline-block bg-brand-600 rounded-full px-8 py-4 shadow-xl shadow-brand-500/20">
+                    <span class="font-bold text-lg text-white">Projected Impact: Reduce Late Deliveries to <span class="text-accent">19%</span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-white border-t border-slate-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold text-slate-900 mb-6">Let's discuss data.</h2>
+            <div class="flex justify-center gap-6 mb-8">
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-brand-600 hover:text-white transition">
+                    <i class="ph-fill ph-linkedin-logo text-xl"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-brand-600 hover:text-white transition">
+                    <i class="ph-fill ph-envelope-simple text-xl"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-brand-600 hover:text-white transition">
+                    <i class="ph-fill ph-github-logo text-xl"></i>
+                </a>
+            </div>
+            <p class="text-slate-500 text-sm">
+                &copy; 2024 Data Analyst Portfolio. All rights reserved.<br>
+                <span class="text-xs text-slate-400 mt-2 block">Case Study based on <a href="https://www.kaggle.com/datasets/shashwatwork/dataco-smart-supply-chain-for-big-data-analysis" class="underline hover:text-brand-600" target="_blank">DataCo Smart Supply Chain Dataset</a>.</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Full Report Modal Overlay -->
+    <div id="reportModal" class="fixed inset-0 z-[60] hidden transition-opacity duration-300 opacity-0" aria-hidden="true">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeReport()"></div>
+        
+        <!-- Modal Content -->
+        <div class="absolute inset-0 flex justify-center py-10 px-4 sm:px-6 pointer-events-none">
+            <div class="bg-white w-full max-w-3xl h-full rounded-xl shadow-2xl flex flex-col pointer-events-auto transform transition-transform duration-300 translate-y-10 scale-95" id="modalCard">
+                <!-- Modal Header -->
+                <div class="flex justify-between items-center px-8 py-5 border-b border-slate-100 bg-white rounded-t-xl z-10">
+                    <div class="flex items-center gap-2 text-slate-500 text-sm">
+                        <span class="bg-brand-100 text-brand-700 px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wide">Case Study Report</span>
+                        <span>•</span>
+                        <span>Oct 2024</span>
+                    </div>
+                    <button onclick="closeReport()" class="text-slate-400 hover:text-slate-700 transition">
+                        <i class="ph-bold ph-x text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Scrollable Body -->
+                <div class="overflow-y-auto modal-scroll p-8 sm:p-12">
+                    <article class="prose prose-slate max-w-none">
+                        <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4 font-sans tracking-tight">Strategic Analysis: Optimizing Global Supply Chain Operations</h1>
+                        <p class="text-xl text-slate-500 leading-relaxed font-light mb-8 font-sans">
+                            A comprehensive deep dive into reducing late delivery rates from 57% to 19% using the DataCo Smart Supply Chain dataset.
+                        </p>
+
+                        <div class="flex items-center gap-4 mb-10 pb-10 border-b border-slate-100">
+                            <div class="w-12 h-12 bg-slate-200 rounded-full flex items-center justify-center">
+                                <i class="ph-fill ph-user text-slate-500 text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-slate-900 text-sm">Portfolio Author</div>
+                                <div class="text-slate-500 text-xs">Data Analyst & Supply Chain Strategist</div>
+                            </div>
+                        </div>
+
+                        <div class="article-text text-slate-800 space-y-6">
+                            <h2 class="text-2xl font-bold font-sans mt-8 text-slate-900">1. Executive Summary</h2>
+                            <p>
+                                In the competitive landscape of global retail, delivery reliability is a key driver of customer retention. Analysis of the <a href="https://www.kaggle.com/datasets/shashwatwork/dataco-smart-supply-chain-for-big-data-analysis" class="text-brand-600 underline decoration-brand-200 underline-offset-2">DataCo Smart Supply Chain Dataset</a> reveals a critical inefficiency: between 2015 and 2017, the organization suffered a <strong>57% late delivery rate</strong>. This operational failure correlated directly with a significant <strong>15% decline in year-over-year transactions</strong> in 2017, signaling a potential loss of customer trust.
+                            </p>
+                            <p>
+                                This report outlines the analytical methodology used to diagnose the root causes of these delays and proposes a data-backed roadmap to achieve a target late delivery rate of <strong>19%</strong> by the end of FY 2018.
+                            </p>
+
+                            <!-- Report Chart 1: Order Trend -->
+                            <figure class="my-8 p-4 bg-slate-50 rounded-lg border border-slate-100">
+                                <h5 class="font-bold text-sm text-slate-500 mb-2 uppercase tracking-wide">Figure 1. Order Volume Correlation</h5>
+                                <div class="relative h-60 w-full">
+                                    <canvas id="reportOrderChart"></canvas>
+                                </div>
+                                <figcaption class="text-center text-xs text-slate-400 mt-2">
+                                    The decline in order volume in 2017 (right) strongly correlates with the sustained high rate of late deliveries.
+                                </figcaption>
+                            </figure>
+
+                            <h2 class="text-2xl font-bold font-sans mt-10 text-slate-900">2. Data Overview & Methodology</h2>
+                            <p>
+                                The analysis utilized the comprehensive DataCo dataset, which encompasses detailed records across Provisioning, Production, Sales, and Commercial Distribution. The dataset includes over <strong>180,000 transactions</strong>, providing a robust foundation for identifying systemic patterns.
+                            </p>
+                            <ul class="list-disc pl-5 space-y-2 marker:text-brand-500">
+                                <li><strong>Tools Utilized:</strong> SQL for data extraction and aggregation; Python (Pandas) for statistical analysis; Tableau/Chart.js for visualization.</li>
+                                <li><strong>Key Metrics Tracked:</strong> Days for shipping (Scheduled vs. Real), Delivery Status, Order Status, and Shipping Mode.</li>
+                                <li><strong>Scope:</strong> Global supply chain operations from 2015 to 2017.</li>
+                            </ul>
+
+                            <h2 class="text-2xl font-bold font-sans mt-10 text-slate-900">3. Root Cause Diagnosis</h2>
+                            <p>
+                                The investigation isolated three primary bottlenecks contributing to the 57% delay rate:
+                            </p>
+
+                            <h3 class="text-lg font-bold font-sans mt-6 text-slate-900">A. The Inventory Paradox</h3>
+                            <p>
+                                Despite consistent demand in Q1-Q3, the analysis revealed a severe <strong>stockout crisis</strong>. Only <strong>17%</strong> of orders had products physically available in stock ("Ready Stock") at the time of purchase. The remaining <strong>83%</strong> of orders triggered backorders or on-demand production, adding unavoidable latency to the fulfillment process. This single factor accounted for nearly half (46%) of all observed delays.
+                            </p>
+
+                            <!-- Report Chart 2: Stock -->
+                            <figure class="my-8 p-4 bg-slate-50 rounded-lg border border-slate-100 flex flex-col items-center">
+                                <h5 class="font-bold text-sm text-slate-500 mb-2 uppercase tracking-wide w-full">Figure 2. Stock Availability Split</h5>
+                                <div class="relative h-48 w-full max-w-sm">
+                                    <canvas id="reportStockChart"></canvas>
+                                </div>
+                                <figcaption class="text-center text-xs text-slate-400 mt-2">
+                                    Over 80% of orders require production or backordering, creating an immediate lead-time deficit.
+                                </figcaption>
+                            </figure>
+
+                            <h3 class="text-lg font-bold font-sans mt-6 text-slate-900">B. Shipping Mode Misalignment</h3>
+                            <p>
+                                Logistics data highlighted a strategic failure in shipping mode selection. <strong>93% of all shipments</strong> utilized "Standard Class" shipping (2-4 days transit), while only <strong>7%</strong> utilized "Same Day" or "First Class" options. 
+                            </p>
+                            <p>
+                                When inventory is unavailable (Process A), relying on the slowest shipping method (Process B) compounds the delay, making on-time delivery mathematically impossible for many orders.
+                            </p>
+
+                            <!-- Report Chart 3: Shipping -->
+                            <figure class="my-8 p-4 bg-slate-50 rounded-lg border border-slate-100">
+                                <h5 class="font-bold text-sm text-slate-500 mb-2 uppercase tracking-wide">Figure 3. Shipping Mode Utilization</h5>
+                                <div class="relative h-48 w-full flex justify-center">
+                                    <canvas id="reportShippingChart"></canvas>
+                                </div>
+                                <figcaption class="text-center text-xs text-slate-400 mt-2">
+                                    The overwhelming reliance on Standard shipping leaves no room to recover lost time from production delays.
+                                </figcaption>
+                            </figure>
+
+                            <h3 class="text-lg font-bold font-sans mt-6 text-slate-900">C. Planning & Scheduling Errors</h3>
+                            <p>
+                                Approximately <strong>11%</strong> of shipments that were physically capable of arriving on time were still marked as late due to internal planning errors. This suggests a disconnect between the Production Planning and Inventory Control (PPIC) team's estimates and the logistics reality.
+                            </p>
+
+                            <h2 class="text-2xl font-bold font-sans mt-10 text-slate-900">4. Strategic Recommendations</h2>
+                            <p>
+                                To reverse the downward trend in transactions and improve reliability, the following three-pillar strategy is recommended:
+                            </p>
+                            
+                            <div class="bg-slate-50 p-6 rounded-lg border-l-4 border-brand-500 my-6">
+                                <h4 class="font-bold font-sans text-brand-700 mb-2">Recommendation 1: Forecast-Based Inventory Loading</h4>
+                                <p class="mb-0 text-sm">
+                                    <strong>Action:</strong> Shift from reactive production to predictive stocking for the Top 10 High-Volume Subcategories.
+                                    <br><strong>Goal:</strong> Increase "Ready Stock" availability from 17% to <strong>46%</strong>.
+                                    <br><strong>Method:</strong> Implement a "Forecast-per-Month" logic that buffers inventory ahead of identified seasonal peaks (Q1-Q3).
+                                </p>
+                            </div>
+
+                             <!-- Report Chart 4: Seasonality -->
+                            <figure class="my-6 p-4 bg-slate-50 rounded-lg border border-slate-100">
+                                <h5 class="font-bold text-sm text-slate-500 mb-2 uppercase tracking-wide">Figure 4. Seasonality Index</h5>
+                                <div class="relative h-40 w-full">
+                                    <canvas id="reportSeasonChart"></canvas>
+                                </div>
+                                <figcaption class="text-center text-xs text-slate-400 mt-2">
+                                    Inventory loading must align with the Q1-Q3 demand plateau to prevent stockouts.
+                                </figcaption>
+                            </figure>
+
+                            <div class="bg-slate-50 p-6 rounded-lg border-l-4 border-accent-500 my-6">
+                                <h4 class="font-bold font-sans text-accent-700 mb-2">Recommendation 2: Dynamic Logistics Upgrade</h4>
+                                <p class="mb-0 text-sm">
+                                    <strong>Action:</strong> Automated shipping upgrades.
+                                    <br><strong>Logic:</strong> If <em>Stock Status = "Unavailable"</em>, automatically upgrade Shipping Mode to <strong>"Same Day"</strong> or <strong>"First Class"</strong>.
+                                    <br><strong>Impact:</strong> The faster transit time compensates for the production delay, preserving the customer promise date.
+                                </p>
+                            </div>
+
+                            <h2 class="text-2xl font-bold font-sans mt-10 text-slate-900">5. Conclusion</h2>
+                            <p>
+                                The 15% drop in sales is a lagging indicator of the supply chain's reliability issues. By addressing the root cause—inventory availability—and creating a logistics safety net, the organization can realistically reduce late deliveries to <strong>19%</strong> within one fiscal year. This recovery in service levels is projected to stabilize transaction volume and restore customer confidence.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+                
+                <!-- Modal Footer -->
+                <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-xl flex justify-between items-center z-10">
+                    <span class="text-xs text-slate-400">Analysis generated for Portfolio purposes</span>
+                    <button onclick="closeReport()" class="px-6 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition text-sm font-bold">Close Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart Scripts & Modal Logic -->
+    <script>
+        // Modal Logic
+        let reportChartsInitialized = false;
+        let reportChartsArray = [];
+
+        function openReport() {
+            const modal = document.getElementById('reportModal');
+            const card = document.getElementById('modalCard');
+            modal.classList.remove('hidden');
+            
+            // Initialize report charts if not already done
+            if (!reportChartsInitialized) {
+                initReportCharts();
+                reportChartsInitialized = true;
+            } else {
+                // Resize logic for Chart.js when container becomes visible
+                reportChartsArray.forEach(chart => chart.resize());
+            }
+
+            // Small delay to allow display:block to apply before opacity transition
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                card.classList.remove('translate-y-10', 'scale-95');
+            }, 10);
+            document.body.style.overflow = 'hidden'; // Prevent body scroll
+        }
+
+        function closeReport() {
+            const modal = document.getElementById('reportModal');
+            const card = document.getElementById('modalCard');
+            modal.classList.add('opacity-0');
+            card.classList.add('translate-y-10', 'scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = ''; // Restore body scroll
+            }, 300);
+        }
+
+        // Common Chart Defaults
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#64748b';
+        Chart.defaults.scale.grid.color = '#f1f5f9';
+
+        // --- Data Definitions (Reused for Main View and Report) ---
+
+        // 1. Order Trend Data
+        const orderTrendConfig = {
+            type: 'line',
+            data: {
+                labels: ['2015', '2016', '2017'],
+                datasets: [{
+                    label: 'Total Orders',
+                    data: [59954, 59926, 50848],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: '#3b82f6',
+                    pointBorderWidth: 2,
+                    pointRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: false, min: 40000 } }
+            }
+        };
+
+        // 2. Stock Data
+        const stockConfig = {
+            type: 'doughnut',
+            data: {
+                labels: ['Ready Stock', 'No Stock'],
+                datasets: [{
+                    data: [17, 83],
+                    backgroundColor: ['#22c55e', '#ef4444'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '75%',
+                plugins: {
+                    legend: { position: 'right', labels: { usePointStyle: true, boxWidth: 6 } }
+                }
+            }
+        };
+
+        // 3. Shipping Data
+        const shippingConfig = {
+            type: 'bar',
+            data: {
+                labels: ['Standard (2-4 Days)', 'Same Day (<1 Day)'],
+                datasets: [{
+                    label: 'Usage %',
+                    data: [93, 7],
+                    backgroundColor: ['#94a3b8', '#f59e0b'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { max: 100, grid: { display: false } },
+                    y: { grid: { display: false } }
+                }
+            }
+        };
+
+        // 4. Seasonality Data
+        const seasonalityConfig = {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Seasonality Index',
+                    data: [1.1, 1.1, 1.08, 1.08, 1.08, 1.05, 1.02, 1.03, 1.01, 0.86, 0.83, 0.79],
+                    backgroundColor: (context) => {
+                        const value = context.raw;
+                        return value >= 1 ? '#3b82f6' : '#cbd5e1';
+                    },
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { label: function(context) { return `Index: ${context.raw}`; } } }
+                },
+                scales: {
+                    y: { beginAtZero: false, grid: { borderDash: [2, 2] } },
+                    x: { grid: { display: false } }
+                }
+            }
+        };
+
+        // --- Initialization ---
+
+        // Initialize Main Dashboard Charts
+        new Chart(document.getElementById('orderTrendChart').getContext('2d'), orderTrendConfig);
+        new Chart(document.getElementById('stockChart').getContext('2d'), stockConfig);
+        new Chart(document.getElementById('shippingChart').getContext('2d'), shippingConfig);
+        new Chart(document.getElementById('seasonalityChart').getContext('2d'), seasonalityConfig);
+
+        // Function to Initialize Report Charts (Called on first modal open)
+        function initReportCharts() {
+            const chart1 = new Chart(document.getElementById('reportOrderChart').getContext('2d'), orderTrendConfig);
+            const chart2 = new Chart(document.getElementById('reportStockChart').getContext('2d'), stockConfig);
+            const chart3 = new Chart(document.getElementById('reportShippingChart').getContext('2d'), shippingConfig);
+            const chart4 = new Chart(document.getElementById('reportSeasonChart').getContext('2d'), seasonalityConfig);
+            reportChartsArray.push(chart1, chart2, chart3, chart4);
+        }
+    </script>
+</body>
+</html>

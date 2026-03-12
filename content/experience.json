@@ -1,0 +1,66 @@
+[
+  {
+    "id": "laku6",
+    "role": "Operations Data Analyst",
+    "company": "Laku6 (Carousell Group)",
+    "location": "Jakarta, Indonesia · Hybrid",
+    "period": "Sep 2023 – Dec 2025",
+    "type": "Full-time",
+    "description": "Led data operations for Indonesia's leading second-hand device marketplace — building reconciliation models, automating reporting pipelines, and redesigning logistics workflows.",
+    "achievements": [
+      "Redesigned order grouping logic for outbound shipments, achieving an estimated 30% improvement in shipping cost efficiency",
+      "Automated daily operational reporting with Python, reducing report lead time by up to 80% across warehouse and logistics teams",
+      "Built shipping cost reconciliation models against 3PL invoices, recovering approximately 10% in operational costs",
+      "Delivered cost allocation models for the finance team to support billing cycle planning",
+      "Maintained Looker Studio dashboards providing management with real-time KPI visibility"
+    ],
+    "tools": [
+      "SQL",
+      "Python",
+      "BigQuery",
+      "Looker Studio",
+      "Google Sheets"
+    ]
+  },
+  {
+    "id": "revou",
+    "role": "Data Analytics Team Lead & Vertical Mentor",
+    "company": "RevoU",
+    "location": "Jakarta, Indonesia · Remote",
+    "period": "Feb 2023 – May 2025",
+    "type": "Part-time",
+    "description": "Transitioned from student to instructor and team lead — teaching full-stack data analytics to career-changers in partnership with AWS.",
+    "achievements": [
+      "Instructed cohorts in SQL, Python, ETL pipelines, and cloud fundamentals; achieved a 4.90/5.00 instructor rating",
+      "Led mentorship sessions identifying individual learning blocks and tailoring teaching approaches accordingly",
+      "Progressed from program graduate to Team Lead within the same cohort cycle"
+    ],
+    "tools": [
+      "SQL",
+      "Python",
+      "Tableau",
+      "AWS",
+      "BigQuery",
+      "Looker Studio"
+    ]
+  },
+  {
+    "id": "freelance",
+    "role": "Quantitative Analyst",
+    "company": "Freelance",
+    "location": "Jakarta, Indonesia · Hybrid",
+    "period": "May 2018 – Apr 2019",
+    "type": "Freelance",
+    "description": "Supported a private fund manager — translating financial strategies into automated execution systems and generating performance reports.",
+    "achievements": [
+      "Built automated trade execution logic capturing a peak daily profit milestone of $16,000 for the fund",
+      "Produced risk management calculations and performance reports using financial spreadsheet models",
+      "Reduced potential portfolio losses by an estimated 10% through systematic trade modeling"
+    ],
+    "tools": [
+      "Python",
+      "Excel",
+      "Financial Modeling"
+    ]
+  }
+]

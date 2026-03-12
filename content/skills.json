@@ -1,0 +1,32 @@
+{
+  "languages": [
+    { "name": "Python", "proficiency": 5 },
+    { "name": "SQL", "proficiency": 5 },
+    { "name": "R", "proficiency": 3 },
+    { "name": "DAX", "proficiency": 4 },
+    { "name": "M (Power Query)", "proficiency": 4 }
+  ],
+  "tools": [
+    { "name": "Power BI", "proficiency": 5 },
+    { "name": "Tableau", "proficiency": 4 },
+    { "name": "Looker / Data Studio", "proficiency": 4 },
+    { "name": "Excel / Google Sheets", "proficiency": 5 },
+    { "name": "dbt", "proficiency": 3 },
+    { "name": "Airflow", "proficiency": 2 },
+    { "name": "Git / GitHub", "proficiency": 4 },
+    { "name": "Jupyter Notebook", "proficiency": 5 },
+    { "name": "VS Code", "proficiency": 5 }
+  ],
+  "capabilities": [
+    "Exploratory Data Analysis (EDA)",
+    "Dashboard Design & BI Reporting",
+    "ETL / Data Pipeline Design",
+    "Statistical Analysis & Modeling",
+    "Data Storytelling & Visualization",
+    "A/B Testing & Experimentation",
+    "Forecasting & Trend Analysis",
+    "Data Quality & Governance",
+    "Cost Optimization Analysis",
+    "Supply Chain Analytics"
+  ]
+}
