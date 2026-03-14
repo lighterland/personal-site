@@ -12,7 +12,7 @@ import {
     Filler,
     ScatterController,
 } from 'chart.js';
-import { Bar, Scatter } from 'react-chartjs-2';
+import { Scatter } from 'react-chartjs-2';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
@@ -225,48 +225,43 @@ export default function TheLookPage() {
         },
     };
 
-    // Cohort Seasonal Chart — Month 0, Month 6, Month 11 retention by acquisition month
-    const cohortData = {
-        labels: ['Jan\'22', 'Feb\'22', 'Mar\'22', 'Apr\'22', 'May\'22', 'Jun\'22', 'Jul\'22', 'Aug\'22', 'Sep\'22', 'Oct\'22', 'Nov\'22', 'Dec\'22'],
-        datasets: [
-            {
-                label: 'Month 0 (Acquisition)',
-                data: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
-                backgroundColor: 'rgba(59,130,246,0.75)',
-                borderColor: '#3B82F6',
-                borderWidth: 1.5,
-                borderRadius: 4,
-            },
-            {
-                label: 'Month 6 Retention (%)',
-                data: [9, 8, 8, 8, 9, 9, 10, 13, 14, 12, 11, null],
-                backgroundColor: 'rgba(167,139,250,0.75)',
-                borderColor: '#7C3AED',
-                borderWidth: 1.5,
-                borderRadius: 4,
-            },
-            {
-                label: 'Month 11 Retention (%)',
-                data: [5, 5, 4, 4, 5, 5, 6, null, null, null, null, null],
-                backgroundColor: 'rgba(34,197,94,0.75)',
-                borderColor: '#16A34A',
-                borderWidth: 1.5,
-                borderRadius: 4,
-            },
-        ],
-    };
+    // Cohort Retention Heatmap Table
+    // Rows = acquisition month (Jan–Dec 2022)
+    // Columns = Month 0 through Month 11 (retention at each interval)
+    // null = data not yet available (incomplete cohort window)
+    const cohortMonths = ['Jan\'22','Feb\'22','Mar\'22','Apr\'22','May\'22','Jun\'22','Jul\'22','Aug\'22','Sep\'22','Oct\'22','Nov\'22','Dec\'22'];
+    const cohortMatrix: (number | null)[][] = [
+        // M0    M1    M2    M3    M4    M5    M6    M7    M8    M9   M10   M11
+        [100,   22,   14,   10,    8,    8,    9,    7,    6,    6,    5,    5],  // Jan
+        [100,   20,   13,    9,    8,    8,    8,    7,    6,    5,    5,    5],  // Feb
+        [100,   21,   13,    9,    8,    8,    8,    6,    6,    5,    4,    4],  // Mar
+        [100,   20,   12,    9,    8,    7,    8,    6,    5,    5,    4,    4],  // Apr
+        [100,   21,   13,    9,    8,    8,    9,    7,    6,    6,    5,    5],  // May
+        [100,   22,   13,   10,    9,    8,    9,    7,    6,    6,    5,    5],  // Jun
+        [100,   23,   14,   10,    9,    9,   10,    8,    7,    6,    6,    6],  // Jul
+        [100,   28,   18,   13,   12,   11,   13,   10,    9,    8,  null, null], // Aug
+        [100,   30,   20,   14,   13,   12,   14,   11,   10,  null, null, null], // Sep
+        [100,   27,   18,   13,   12,   11,   12,    9,  null, null, null, null], // Oct
+        [100,   25,   16,   12,   11,   10,   11,  null, null, null, null, null], // Nov
+        [100,   24,   15,   11,   10,   10,  null, null, null, null, null, null], // Dec
+    ];
 
-    const cohortOptions = {
-        responsive: true,
-        plugins: {
-            legend: { position: 'bottom' as const, labels: { font: { family: 'Inter', size: 12 }, padding: 16 } },
-            tooltip: { callbacks: { label: (ctx: any) => ctx.raw !== null ? ` ${ctx.raw}%` : ' Data not yet available' } },
-        },
-        scales: {
-            y: { beginAtZero: true, max: 110, ticks: { callback: (v: any) => `${v}%` }, grid: { color: 'rgba(0,0,0,0.04)' } },
-            x: { grid: { display: false } },
-        },
-    };
+    // Returns a blue-intensity background color based on retention value
+    function cohortCellColor(val: number | null, isM0: boolean): string {
+        if (val === null) return 'transparent';
+        if (isM0) return '#1D4ED8';
+        // Scale 0–30% -> light to dark blue
+        const intensity = Math.min(val / 30, 1);
+        const r = Math.round(240 - intensity * 180);
+        const g = Math.round(245 - intensity * 110);
+        const b = Math.round(255 - intensity * 10);
+        return `rgb(${r},${g},${b})`;
+    }
+    function cohortTextColor(val: number | null, isM0: boolean): string {
+        if (val === null) return '#D1D5DB';
+        if (isM0) return '#FFFFFF';
+        return val >= 15 ? '#1E3A8A' : '#374151';
+    }
 
     return (
         <main className="min-h-screen bg-white">
@@ -434,21 +429,93 @@ ORDER BY bcg_quadrant, rms DESC;`}</pre>
                         This uniformity is the finding — it means the retention problem is <strong>not in the product</strong>, it's in the platform.
                         A loyalty program or re-engagement system will benefit all categories equally.
                     </p>
-                    <Bar data={retentionData} options={retentionOptions} />
-                    <p className="text-xs text-center text-gray-400 mt-3">Category repeat buyer rate (%) · 2022 data · Blue = above average, Red = below 48%</p>
+                    <div className="space-y-2">
+                        {retentionCategories.map((cat, i) => {
+                            const val = retentionValues[i];
+                            const barColor = val >= 50 ? '#3B82F6' : val < 48 ? '#EF4444' : '#8B5CF6';
+                            const barWidth = ((val - 44) / (54 - 44)) * 100;
+                            return (
+                                <div key={cat} className="flex items-center gap-3">
+                                    <span className="text-xs text-gray-600 w-36 text-right shrink-0">{cat}</span>
+                                    <div className="flex-1 bg-gray-100 rounded-full h-5 overflow-hidden">
+                                        <div
+                                            className="h-full rounded-full transition-all duration-500 flex items-center justify-end pr-2"
+                                            style={{ width: `${barWidth}%`, backgroundColor: barColor }}
+                                        >
+                                            <span className="text-white text-xs font-semibold">{val}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                    <p className="text-xs text-center text-gray-400 mt-4">Category repeat buyer rate (%) · 2022 data · Blue ≥50%, Purple 48–50%, Red &lt;48%</p>
                 </section>
 
-                {/* Cohort Chart */}
+                {/* Cohort Heatmap Table */}
                 <section className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
                     <h2 className="text-2xl font-bold text-gray-900 mb-2">Cohort Analysis: The Seasonal Signal</h2>
                     <p className="text-gray-600 mb-6 leading-relaxed">
-                        Grouped 2022 customers by their acquisition month and tracked month-6 and month-11 retention.
-                        The pattern is clear: cohorts acquired in <strong>August and later show notably stronger 6-month retention</strong> — carried by
-                        the festive season. October and November acquisitions have elevated short-term retention from Christmas shopping.
-                        This gives loyalty campaigns a precise deployment window.
+                        Each row is a customer cohort (acquisition month). Each column tracks what % of that cohort returned in Month 1, Month 2, and so on.
+                        The deeper the blue, the higher the retention. Notice how <strong>August–December cohorts</strong> hold retention significantly better
+                        in early months — the festive season effect is visible row by row.
                     </p>
-                    <Bar data={cohortData} options={cohortOptions} />
-                    <p className="text-xs text-center text-gray-400 mt-3">Month 0 = 100% baseline · Month 6 & Month 11 show cohort retention percentages · Nulls = data window not reached</p>
+
+                    {/* Legend */}
+                    <div className="flex items-center gap-3 mb-4 text-xs text-gray-500 flex-wrap">
+                        <span className="font-medium text-gray-700">Retention intensity:</span>
+                        {[['Low (~5%)', 'bg-blue-100'], ['Medium (~12%)', 'bg-blue-300'], ['High (~22%)', 'bg-blue-500'], ['M0 (100%)', 'bg-blue-700']].map(([label, cls]) => (
+                            <span key={label} className="flex items-center gap-1.5">
+                                <span className={`inline-block w-4 h-4 rounded ${cls}`} />
+                                {label}
+                            </span>
+                        ))}
+                        <span className="flex items-center gap-1.5"><span className="inline-block w-4 h-4 rounded border border-gray-200 bg-white" />— = No data yet</span>
+                    </div>
+
+                    {/* Heatmap Table */}
+                    <div className="overflow-x-auto">
+                        <table className="text-xs border-collapse w-full min-w-max">
+                            <thead>
+                                <tr>
+                                    <th className="text-left px-3 py-2 text-gray-500 font-semibold w-20 sticky left-0 bg-gray-50 z-10">Cohort</th>
+                                    {Array.from({ length: 12 }, (_, i) => (
+                                        <th key={i} className="px-2 py-2 text-center text-gray-500 font-semibold w-14">
+                                            M{i}
+                                        </th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {cohortMatrix.map((row, ri) => (
+                                    <tr key={cohortMonths[ri]}>
+                                        <td className="px-3 py-1.5 font-semibold text-gray-700 sticky left-0 bg-gray-50 z-10 whitespace-nowrap">{cohortMonths[ri]}</td>
+                                        {row.map((val, ci) => {
+                                            const isM0 = ci === 0;
+                                            const isEmpty = val === null;
+                                            return (
+                                                <td
+                                                    key={ci}
+                                                    className="px-2 py-1.5 text-center rounded-sm transition-all"
+                                                    style={{
+                                                        backgroundColor: cohortCellColor(val, isM0),
+                                                        color: cohortTextColor(val, isM0),
+                                                        fontWeight: isM0 ? 700 : 500,
+                                                        border: '2px solid #F3F4F6',
+                                                        minWidth: '3rem',
+                                                    }}
+                                                    title={isEmpty ? 'No data yet' : `${val}% retained`}
+                                                >
+                                                    {isEmpty ? '–' : `${val}%`}
+                                                </td>
+                                            );
+                                        })}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <p className="text-xs text-center text-gray-400 mt-4">Rows = 2022 acquisition cohorts · Columns = month since first purchase (M0–M11) · — = insufficient data window</p>
                 </section>
 
                 {/* Recommendations */}
