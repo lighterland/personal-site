@@ -1,0 +1,47 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark Blue Background -->
+  <rect width="512" height="512" rx="112" fill="#0F172A"/>
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" opacity="0.3"/>
+  
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3B82F6"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <!-- Gradient for 'S' line graph -->
+    <linearGradient id="sGrad" x1="101" y1="130" x2="221" y2="382" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8"/>
+      <stop offset="1" stop-color="#2DD4BF"/>
+    </linearGradient>
+
+    <!-- Gradients for 'E' bar charts -->
+    <linearGradient id="eGrad1" x1="281" y1="130" x2="411" y2="130" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#60A5FA"/>
+      <stop offset="1" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="eGrad2" x1="281" y1="256" x2="356" y2="256" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#818CF8"/>
+      <stop offset="1" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="eGrad3" x1="281" y1="382" x2="391" y2="382" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 'S' formed by a node-connected Line Graph -->
+  <!-- Main Path -->
+  <path d="M221 130 L101 130 L101 256 L221 256 L221 382 L101 382" stroke="url(#sGrad)" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Data Nodes on the 'S' line to emphasize it is a chart -->
+  <circle cx="221" cy="130" r="14" fill="#FFFFFF"/>
+  <circle cx="101" cy="256" r="14" fill="#FFFFFF"/>
+  <circle cx="221" cy="256" r="14" fill="#FFFFFF"/>
+  <circle cx="101" cy="382" r="14" fill="#FFFFFF"/>
+
+  <!-- 'E' formed by horizontal Bar Charts -->
+  <rect x="281" y="104" width="130" height="52" rx="26" fill="url(#eGrad1)"/>
+  <rect x="281" y="230" width="75" height="52" rx="26" fill="url(#eGrad2)"/>
+  <rect x="281" y="356" width="110" height="52" rx="26" fill="url(#eGrad3)"/>
+</svg>
