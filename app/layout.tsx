@@ -15,12 +15,12 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sadana Erland | Data Analyst & Storyteller",
+  title: "Erland Sadana | Data Analyst & Storyteller",
   description:
-    "Portfolio of Sadana Erland — data analyst specializing in logistics, supply chain analytics, and data storytelling. Turning data into decisions.",
+    "Portfolio of Erland Sadana — data analyst specializing in logistics, supply chain analytics, and data storytelling. Turning data into decisions.",
   keywords: [
     "Data Analyst",
-    "Sadana Erland",
+    "Erland Sadana",
     "Power BI",
     "Python",
     "SQL",
@@ -28,17 +28,17 @@ export const metadata: Metadata = {
     "Logistics Analytics",
     "Supply Chain",
   ],
-  authors: [{ name: "Sadana Erland" }],
+  authors: [{ name: "Erland Sadana" }],
   openGraph: {
-    title: "Sadana Erland | Data & Narrative",
+    title: "Erland Sadana | Data & Narrative",
     description: "Turning data into decisions.",
     url: "https://sadanaerland.com",
-    siteName: "Sadana Erland Portfolio",
+    siteName: "Erland Sadana Portfolio",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sadana Erland | Data & Narrative",
+    title: "Erland Sadana | Data & Narrative",
     description: "Turning data into decisions.",
   },
 };

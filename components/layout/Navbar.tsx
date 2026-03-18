@@ -43,7 +43,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <span className="text-brand-500 font-bold text-lg tracking-tight group-hover:text-brand-600 transition-colors">
-              Sadana Erland
+              Erland Sadana
             </span>
             <span className={`text-sm font-medium transition-colors ${scrolled ? 'text-gray-400' : 'text-blue-300'}`}>
               | Data & Narrative

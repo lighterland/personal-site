@@ -35,7 +35,7 @@ export default function Hero() {
           <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white/30 shadow-2xl overflow-hidden ring-4 ring-brand-400/20">
             <Image
               src="/pp.png"
-              alt="Sadana Erland"
+              alt="Erland Sadana"
               fill
               className="object-cover object-top"
               priority
@@ -46,7 +46,7 @@ export default function Hero() {
         {/* Name */}
         <div style={{ animation: 'fadeInUp 0.6s ease-out 0.2s both' }}>
           <h1 className="text-5xl md:text-6xl font-bold text-white tracking-tight">
-            Sadana Erland
+            Erland Sadana
           </h1>
         </div>
 
@@ -82,7 +82,7 @@ export default function Hero() {
             View My Work
           </button>
           <a
-            href="/cv/sadana-erland-cv.pdf"
+            href="/cv/erland-sadana-cv.pdf"
             download
             className="btn-secondary text-base px-8 py-3 text-white border-blue-300 hover:bg-white/10"
           >

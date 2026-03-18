@@ -1,5 +1,5 @@
 # Product Requirements Document
-## Sadana Erland | Data & Narrative — Personal Portfolio Website
+## Erland Sadana | Data & Narrative — Personal Portfolio Website
 
 **Version:** 1.0  
 **Author:** AI Product Team  
@@ -31,14 +31,14 @@
 
 > *"A portfolio that doesn't just show what Sadana has done — it demonstrates how she thinks."*
 
-Sadana Erland's portfolio is a living, interactive document of analytical thinking. Rather than a static resume, it functions as a lightweight data product: structured, insightful, and designed to tell stories through data. Visitors should leave understanding not just Sadana's technical skills, but her ability to turn raw data into business decisions.
+Erland Sadana's portfolio is a living, interactive document of analytical thinking. Rather than a static resume, it functions as a lightweight data product: structured, insightful, and designed to tell stories through data. Visitors should leave understanding not just Sadana's technical skills, but her ability to turn raw data into business decisions.
 
 ### 1.2 Core Brand Identity
 
 | Element | Value |
 |---|---|
-| **Name** | Sadana Erland |
-| **Brand Title** | Sadana Erland \| Data & Narrative |
+| **Name** | Erland Sadana |
+| **Brand Title** | Erland Sadana \| Data & Narrative |
 | **Tagline** | *"Turning data into decisions."* |
 | **Tone** | Confident, analytical, human |
 | **Aesthetic** | Modern analytics dashboard × storytelling portfolio |
@@ -154,7 +154,7 @@ The page is a **single continuous narrative**. Each section flows into the next,
 | Projects | `/content/projects/*.md` |
 | Experience | `/content/experience.json` |
 | Skills | `/content/skills.json` |
-| CV File | `/public/cv/sadana-erland-cv.pdf` |
+| CV File | `/public/cv/erland-sadana-cv.pdf` |
 | Playground Config | `/content/playground.json` |
 
 ---
@@ -168,9 +168,9 @@ The page is a **single continuous narrative**. Each section flows into the next,
 **Layout:** Full viewport height (`100vh`), centered vertically and horizontally.
 
 **Elements:**
-- Top-left or top-center: `Sadana Erland | Data & Narrative` (logo/wordmark)
+- Top-left or top-center: `Erland Sadana | Data & Narrative` (logo/wordmark)
 - Center: Photo placeholder (circular, 160×160px — see §5.1.1)
-- H1: `Sadana Erland`
+- H1: `Erland Sadana`
 - H2: `Data Analyst · Storyteller · Problem Solver`
 - Paragraph (max 2 lines): Short tagline drawn from CV summary
 - Social icons row: LinkedIn, GitHub, Medium (with `aria-labels`)
@@ -205,7 +205,7 @@ The page is a **single continuous narrative**. Each section flows into the next,
 - Subtle background: very light blue-gray (`#F8FAFF`)
 
 **5.2.1 Suggested About Copy (based on CV profile — edit as needed):**
-> Sadana Erland is a data analyst who believes the most powerful thing a dataset can do is change a decision. She works at the intersection of logistics, supply chain, and business intelligence — translating complex operational data into clear, actionable insights.
+> Erland Sadana is a data analyst who believes the most powerful thing a dataset can do is change a decision. She works at the intersection of logistics, supply chain, and business intelligence — translating complex operational data into clear, actionable insights.
 >
 > Her approach is methodical but narrative-driven: every analysis begins with a question and ends with a recommendation. She has worked across industries including [insert from CV], building dashboards, automating reporting pipelines, and surfacing patterns that drive cost savings and efficiency gains.
 >
@@ -331,7 +331,7 @@ Full specification in **§7. Portfolio Content Model**.
 - Section heading: `Curriculum Vitae`
 - Subtitle: *"Download or read inline."*
 - Scrollable PDF embed using `react-pdf` or `<iframe>`
-- Download button: `⬇ Download CV (PDF)` — triggers download of `/public/cv/sadana-erland-cv.pdf`
+- Download button: `⬇ Download CV (PDF)` — triggers download of `/public/cv/erland-sadana-cv.pdf`
 - Viewer height: 700px on desktop, 500px on mobile
 - Fallback: If PDF fails to load, show "View CV on Google Drive" link
 
@@ -339,7 +339,7 @@ Full specification in **§7. Portfolio Content Model**.
 ```jsx
 import { Document, Page } from 'react-pdf';
 // OR use a simple iframe:
-<iframe src="/cv/sadana-erland-cv.pdf" width="100%" height="700px" />
+<iframe src="/cv/erland-sadana-cv.pdf" width="100%" height="700px" />
 ```
 
 ---
@@ -363,7 +363,7 @@ import { Document, Page } from 'react-pdf';
 - Email address (with copy-to-clipboard button)
 
 **Bottom of Page:**
-- Copyright line: `© 2026 Sadana Erland. Built with data and coffee.`
+- Copyright line: `© 2026 Erland Sadana. Built with data and coffee.`
 
 ---
 
@@ -924,18 +924,18 @@ export default async function ProjectPage({ params }) {
 **`/app/layout.tsx`**
 ```typescript
 export const metadata = {
-  title: 'Sadana Erland | Data Analyst & Storyteller',
-  description: 'Portfolio of Sadana Erland — data analyst specializing in logistics, supply chain analytics, and data storytelling.',
+  title: 'Erland Sadana | Data Analyst & Storyteller',
+  description: 'Portfolio of Erland Sadana — data analyst specializing in logistics, supply chain analytics, and data storytelling.',
   openGraph: {
-    title: 'Sadana Erland | Data & Narrative',
+    title: 'Erland Sadana | Data & Narrative',
     description: 'Turning data into decisions.',
     url: 'https://sadanaerland.com',
-    siteName: 'Sadana Erland Portfolio',
+    siteName: 'Erland Sadana Portfolio',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sadana Erland | Data & Narrative',
+    title: 'Erland Sadana | Data & Narrative',
   },
 };
 ```
@@ -948,7 +948,7 @@ export const metadata = {
 sadana-portfolio/
 ├── public/
 │   ├── cv/
-│   │   └── sadana-erland-cv.pdf          # Upload CV here
+│   │   └── erland-sadana-cv.pdf          # Upload CV here
 │   ├── images/
 │   │   ├── projects/                      # Project thumbnails
 │   │   └── og-image.png                   # Social preview image
@@ -1151,10 +1151,10 @@ git push origin main
 
 ```bash
 # Replace the PDF file
-cp ~/downloads/sadana-erland-cv-2026.pdf public/cv/sadana-erland-cv.pdf
+cp ~/downloads/erland-sadana-cv-2026.pdf public/cv/erland-sadana-cv.pdf
 
 # Commit and push
-git add public/cv/sadana-erland-cv.pdf
+git add public/cv/erland-sadana-cv.pdf
 git commit -m "Update CV - March 2026"
 git push origin main
 ```

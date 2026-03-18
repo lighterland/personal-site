@@ -65,7 +65,7 @@ export default function About() {
             </h2>
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>
-                Sadana Erland is a data analyst who believes the most powerful thing a
+                Erland Sadana is a data analyst who believes the most powerful thing a
                 dataset can do is <strong>change a decision</strong>. He works at the
                 intersection of logistics, supply chain, and business intelligence —
                 translating complex operational data into clear, actionable insights.

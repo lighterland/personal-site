@@ -1,4 +1,4 @@
-# Sadana Erland | Data & Narrative — Portfolio Website
+# Erland Sadana | Data & Narrative — Portfolio Website
 
 A production-ready personal portfolio website for a Data Analyst, built with Next.js 14, TailwindCSS, Chart.js, D3.js, and Framer Motion.
 
@@ -83,7 +83,7 @@ Open [http://localhost:3000](http://localhost:3000).
 │
 └── public/
     └── cv/
-        └── sadana-erland-cv.pdf
+        └── erland-sadana-cv.pdf
 ```
 
 ---
@@ -134,10 +134,10 @@ tools: ["Python", "SQL", "Power BI"]
 
 ```bash
 # Replace the file
-cp ~/downloads/your-cv.pdf public/cv/sadana-erland-cv.pdf
+cp ~/downloads/your-cv.pdf public/cv/erland-sadana-cv.pdf
 
 # Commit
-git add public/cv/sadana-erland-cv.pdf
+git add public/cv/erland-sadana-cv.pdf
 git commit -m "Update CV"
 git push
 ```
