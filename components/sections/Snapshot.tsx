@@ -1,4 +1,5 @@
 import StatCard from '@/components/ui/StatCard';
+import { Calendar, BarChart2, DollarSign, Search } from 'lucide-react';
 
 const industries = ['Logistics', 'Supply Chain', 'Retail / FMCG', 'E-Commerce', 'Research'];
 const coreSkills = [
@@ -25,10 +26,10 @@ export default function Snapshot() {
 
         {/* Stat cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <StatCard value={3} suffix="+" label="Years of Experience" icon="📅" />
-          <StatCard value={20} suffix="+" label="Dashboards Built" icon="📊" />
-          <StatCard value={68} suffix="K" prefix="$" label="Cost Savings Identified" icon="💰" />
-          <StatCard value={30} suffix="+" label="Datasets Analyzed" icon="🔍" />
+          <StatCard value={3} suffix="+" label="Years of Experience" icon={<Calendar size={32} />} />
+          <StatCard value={20} suffix="+" label="Dashboards Built" icon={<BarChart2 size={32} />} />
+          <StatCard value={68} suffix="K" prefix="$" label="Cost Savings Identified" icon={<DollarSign size={32} />} />
+          <StatCard value={30} suffix="+" label="Datasets Analyzed" icon={<Search size={32} />} />
         </div>
 
         {/* 3-column grid */}

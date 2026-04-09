@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { Project } from '@/lib/projects';
-import { ArrowLeft, Calendar } from 'lucide-react';
+import { ArrowLeft, Calendar, Star, Sparkles } from 'lucide-react';
 import { formatDate, getTagColor } from '@/lib/utils';
 
 interface ProjectLayoutProps {
@@ -26,8 +26,8 @@ export default function ProjectLayout({ project, content }: ProjectLayoutProps) 
               {project.industry}
             </span>
             {project.featured && (
-              <span className="px-3 py-1 rounded-full bg-yellow-400/20 text-yellow-200 text-xs font-medium border border-yellow-400/30">
-                ⭐ Featured
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-400/20 text-yellow-200 text-xs font-medium border border-yellow-400/30">
+                <Star size={12} fill="currentColor" /> Featured
               </span>
             )}
           </div>
@@ -36,7 +36,7 @@ export default function ProjectLayout({ project, content }: ProjectLayoutProps) 
 
           {/* Impact banner */}
           <div className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-white/10 border border-white/20 backdrop-blur-sm mb-6">
-            <span className="text-green-300 text-lg">✦</span>
+            <Sparkles className="text-green-300" size={18} />
             <span className="text-white font-medium">{project.impact}</span>
           </div>
 

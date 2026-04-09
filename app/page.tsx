@@ -9,7 +9,6 @@ import Experience from '@/components/sections/Experience';
 import CVViewer from '@/components/sections/CVViewer';
 import Contact from '@/components/sections/Contact';
 import Portfolio from '@/components/sections/Portfolio';
-import Playground from '@/components/sections/Playground';
 
 export default function Home() {
   return (
@@ -19,7 +18,6 @@ export default function Home() {
         <Hero />
         <About />
         <Snapshot />
-        <Playground />
         <Skills />
         <Portfolio />
         <Experience />

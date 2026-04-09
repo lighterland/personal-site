@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, ReactNode } from 'react';
 import { animateCounter } from '@/lib/utils';
 
 interface StatCardProps {
@@ -7,7 +7,7 @@ interface StatCardProps {
   suffix?: string;
   prefix?: string;
   label: string;
-  icon?: string;
+  icon?: ReactNode;
   decimals?: number;
 }
 
@@ -44,7 +44,7 @@ export default function StatCard({
 
   return (
     <div ref={ref} className="card p-6 text-center">
-      {icon && <div className="text-3xl mb-2">{icon}</div>}
+      {icon && <div className="flex justify-center text-3xl mb-2 text-brand-500">{icon}</div>}
       <div className="text-4xl font-bold text-brand-700 mb-1 font-mono">
         {prefix}{display}{suffix}
       </div>

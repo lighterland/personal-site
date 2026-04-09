@@ -77,11 +77,6 @@ export default function About() {
                 automating reporting pipelines, and surfacing patterns that drive cost
                 savings and efficiency gains.
               </p>
-              <p>
-                When he&apos;s not wrangling data, he writes about analytics and data
-                storytelling on Medium — because the best analysis is the one that
-                gets <em>read</em>.
-              </p>
             </div>
 
             {/* Highlight pills */}
